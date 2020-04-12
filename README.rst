@@ -4,6 +4,8 @@
 
 .. image:: https://raw.githubusercontent.com/rainygirl/random.coroke.net/master/icon.png
 
+`Demo <http://htmlpreview.github.io/?https://github.com/rainygirl/random.coroke.net/blob/master/index.html>`_
+
 당신의 점심 / 저녁 메뉴를 대신 골라주는 코드입니다.
 
 PC 에서는 클릭 또는 키입력으로, 모바일에는 터치로 메뉴를 고르게 되어있습니다.
