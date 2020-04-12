@@ -4,7 +4,7 @@
 
 .. image:: https://raw.githubusercontent.com/rainygirl/random.coroke.net/master/icon.png
 
-`Demo <http://htmlpreview.github.io/?https://github.com/rainygirl/random.coroke.net/blob/master/index.html>`_
+`Demo <https://random.coroke.net>`_
 
 당신의 점심 / 저녁 메뉴를 대신 골라주는 코드입니다.
 
