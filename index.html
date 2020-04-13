@@ -113,7 +113,7 @@ body.done footer{
 }
 
 body.done .share{
-	opacity:1;
+    opacity:1;
 }
 @media all and (max-width:640px) {
     
@@ -130,12 +130,11 @@ body.done .share{
     }
 }
 
-
 </style>
 </head>
 <body>
     <h1>랜덤 고로케</h1>
-    <p id="msg">무엇을 대신 골라드릴까요</p>
+    <p id="msg">대신 골라드립니다</p>
 
     <div id="l_lunch" class="list">
 <a href="#">탕수육</a>
@@ -188,7 +187,7 @@ body.done .share{
         <a href="#" class="fb"><i class="fa fa-facebook"></i></a>
     </div>
 
-    <a href="#" class="reload">다시한번!</a>
+    <a href="#" class="reload">다시 한번!</a>
 
     <footer>
         <p class="credit">Developed by <a href="http://rainygirl.com" target="_blank">rainygirl</a></p>
@@ -196,100 +195,115 @@ body.done .share{
 
     <script>//<![CDATA[
 
-var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-30465925-1"]);_gaq.push(["_setDomainName","random.coroke.net"]);_gaq.push(["_trackPageview"]);(function(){var c=document.createElement("script");c.type="text/javascript";c.async=true;c.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var d=document.getElementsByTagName("script")[0];d.parentNode.insertBefore(c,d)})();
+var _gaq = _gaq || [];
+_gaq.push(["_setAccount", "UA-30465925-1"]);
+_gaq.push(["_setDomainName", "random.coroke.net"]);
+_gaq.push(["_trackPageview"]);
 
-(function(){
-    var stop=true,
-        msg=document.getElementById('msg'),
-		visibleitem='';
 
-    var ismobile=(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+(function() {
+    var c = document.createElement("script");
+    c.type = "text/javascript";
+    c.async = true;
+    c.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+    var d = document.getElementsByTagName("script")[0];
+    d.parentNode.insertBefore(c, d)
+})();
 
-    function share(category){
-        switch(category) {
+(function() {
+    var stop = true,
+        msg = document.getElementById('msg'),
+        visibleitem = '',
+        ismobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+
+    function share(category) {
+        switch (category) {
             case 'twitter':
-				var msg=document.title + ' ' + location.href;
-				function _(){
-					var url='https://twitter.com/intent/tweet?text=' +encodeURIComponent(msg);
-					window.open(url);
-				}
-				if(ismobile) {
-					var time=(new Date()).getTime();
-					window.location.href='twitter://post?message=' + encodeURIComponent(msg);
-					setTimeout(function(){
-						var now=(new Date()).getTime();
-						if((now - time) < 600) _();
-					}, 500);
-					return;
-				}
-				_();
-				break;
+                var msg = document.title + ' ' + location.href;
+
+                function _() {
+                    var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(msg);
+                    window.open(url);
+                }
+                if (ismobile) {
+                    var time = (new Date()).getTime();
+                    window.location.href = 'twitter://post?message=' + encodeURIComponent(msg);
+                    setTimeout(function() {
+                        var now = (new Date()).getTime();
+                        if ((now - time) < 600) _();
+                    }, 500);
+                    return;
+                }
+                _();
+                break;
             case 'facebook':
-                var url=location.href;
+                var url = location.href;
                 window.open('https://www.facebook.com/dialog/feed?app_id=348223775230595&display=popup&caption=' + encodeURIComponent(document.title) + "+" + encodeURIComponent(url) + '&link=' + encodeURIComponent(url) + '&redirect_uri=' + encodeURIComponent(url));;
                 break;
         }
     }
 
-    function rolling(id,idx,cnt){
-        var items=document.querySelectorAll('#' + id + ' a');
-		visibleitem=items[idx].innerText;
-        items.forEach(function(d,i){
-            d.style.display=i==idx?'block':'none';
+    function rolling(id, idx, cnt) {
+        var items = document.querySelectorAll('#' + id + ' a');
+        visibleitem = items[idx].innerText;
+        items.forEach(function(d, i) {
+            d.style.display = i == idx ? 'block' : 'none';
         });
-        if(!stop) window.setTimeout(function(){rolling(id,idx+1>=cnt?0:idx+1,cnt);},50);
+        if (!stop) window.setTimeout(function() {
+            rolling(id, idx + 1 >= cnt ? 0 : idx + 1, cnt);
+        }, 50);
     }
 
-    function launch(){
-        window.scrollTo(0,0);
-        document.body.className='ing';
-        msg.innerHTML=ismobile?'아무데나 터치하세요':'아무데나 눌러 고르세요';
+    function launch() {
+        window.scrollTo(0, 0);
+        document.body.className = 'ing';
+        msg.innerHTML = ismobile ? '아무데나 터치하세요' : '아무데나 눌러 고르세요';
 
-        stop=false;
-        rolling('l_lunch',0,document.querySelectorAll('#l_lunch a').length)
+        stop = false;
+        rolling('l_lunch', 0, document.querySelectorAll('#l_lunch a').length)
 
     }
 
-    function choose(e){
-        if((!e.keyCode || (e.keyCode==13 || e.keyCode==32)) && !stop) {
-            
+    function choose(e) {
+        if ((!e.keyCode || (e.keyCode == 13 || e.keyCode == 32)) && !stop) {
+
             e.preventDefault();
-            var domain=window.location.href.replace('http://','').split('/')[0];
-            stop=true;
-            msg.innerHTML='이거 드세요!';
+            var domain = window.location.href.replace('http://', '').split('/')[0];
+            stop = true;
+            msg.innerHTML = '이거 드세요!';
 
-            var txt='랜덤 고로케가 골라준 점심메뉴는 ' + '[' + visibleitem + '] 당첨';
-            document.title=txt;
+            var txt = '랜덤 고로케가 골라준 점심메뉴는 ' + '[' + visibleitem + '] 당첨';
+            document.title = txt;
 
-            document.body.className='done';
+            document.body.className = 'done';
         }
     }
 
-    window.onload=function(){
+    window.onload = function() {
 
-        document.querySelector('.reload').addEventListener('click',function(event){
+        document.querySelector('.reload').addEventListener('click', function(event) {
             event.preventDefault();
-            stop=false;
+            stop = false;
             launch();
         });
-        document.querySelector('.tw').addEventListener('click',function(event){
+        document.querySelector('.tw').addEventListener('click', function(event) {
             event.preventDefault();
             share('twitter');
         });
-        document.querySelector('.fb').addEventListener('click',function(event){
+        document.querySelector('.fb').addEventListener('click', function(event) {
             event.preventDefault();
             share('facebook');
         });
 
-        ['keydown','mousedown','touchstart'].forEach(function(d){
-            document.addEventListener(d,function(event){
+        ['keydown', 'mousedown', 'touchstart'].forEach(function(d) {
+            document.addEventListener(d, function(event) {
                 choose(event);
             });
-        })	
+        })
         launch();
     };
 })();
 
 //]]>
-	</script>
+    </script>
 </body></html>
